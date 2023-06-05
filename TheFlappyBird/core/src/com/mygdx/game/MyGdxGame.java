@@ -28,12 +28,10 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.graphics.getDeltaTime();
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.render(batch);
-		gsm.func();
 //		batch.begin();
 //		batch.draw(img, 0, 0);
 //		batch.end();

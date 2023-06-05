@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.FloatArray;
 import java.util.ArrayList;
 
 public class SpriteGroup {
-    ArrayList<AbstractBaseSprite> sprites;
+    public ArrayList<AbstractBaseSprite> sprites;
     public SpriteGroup(){
         this.sprites = new ArrayList<AbstractBaseSprite>();
     }
@@ -27,11 +27,10 @@ public class SpriteGroup {
             }
             else{
                 flag = true;
-                index = 0;
             }
         }
         if(flag){
-            this.sprites.remove(index);
+            this.sprites.remove(0);
         }
     }
     public void render(SpriteBatch sb){

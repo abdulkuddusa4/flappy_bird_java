@@ -23,6 +23,13 @@ public class GameStateManager {
         states.pop();
         states.push(state);
     }
+    public int length(){
+        int count = 0;
+        for(AbstractBaseState state:this.states){
+            count+=1;
+        }
+        return count;
+    }
 
     public void update(float dt){
 
@@ -31,9 +38,6 @@ public class GameStateManager {
 
     public void render(SpriteBatch batch){
         states.peek().render(batch);
-    }
-    public void func(){
-
     }
 
 }

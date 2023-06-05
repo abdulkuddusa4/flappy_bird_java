@@ -4,7 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import java.security.PublicKey;
 
 public class Bird extends AbstractBaseSprite {
 
@@ -12,12 +15,17 @@ public class Bird extends AbstractBaseSprite {
     double v=0;
     boolean UP=false;
     public boolean not_dead = true;
+    public int SCORE;
+    BitmapFont SCORE_BOARD;
 
     Sound flap_music = Gdx.audio.newSound(Gdx.files.internal("gameplay/musics/wing.mp3"));
     public Bird(String img_path,int x, int y){
         super(img_path);
         this.setSize(30,30);
         this.setCenter(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+        this.SCORE_BOARD=new BitmapFont();
+        this.SCORE_BOARD.getData().setScale(2f);
+        this.SCORE_BOARD.setColor(0.0f,0.0f,0.0f,1.0f);
 
     }
 
@@ -31,6 +39,13 @@ public class Bird extends AbstractBaseSprite {
     public void update(float dt){
         this.handleInput();
         this.v+=g;
+
+        //CALCULATING SCORE
+
+
+
+
+        //END
         if(this.v<0 && this.UP){
             this.setTexture(new Texture("gameplay/flappy1.png"));
             this.UP=false;
@@ -62,7 +77,7 @@ public class Bird extends AbstractBaseSprite {
     public void jump(){
         if(not_dead && this.getVertices()[SpriteBatch.Y2]<Gdx.graphics.getHeight()){
             this.flap_music.play(1f);
-            this.v=8;
+            this.v=7;
         }
     }
 

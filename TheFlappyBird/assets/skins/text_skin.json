@@ -1,0 +1,12 @@
+{
+  "com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
+    "text-field-background": { "name": "text-field-background", "color": { "r": 0.8, "g": 0.8, "b": 0.8, "a": 1 } }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
+    "default": {
+      "background": "text-field-background",
+      "fontColor": "white",
+      "cursor": "text-cursor"
+    }
+  }
+}
