@@ -1,6 +1,7 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,6 +23,7 @@ public class GamePlayState extends AbstractBaseState {
     int time;
 
     BitmapFont SCORE_BOARD;
+    Sound theme_song = Gdx.audio.newSound(Gdx.files.internal("gameplay/musics/theme_song.mp3"));
 
     public GamePlayState(GameStateManager gsm) {
         super(gsm);
@@ -31,6 +33,7 @@ public class GamePlayState extends AbstractBaseState {
         this.SCORE_BOARD=new BitmapFont();
         this.SCORE_BOARD.getData().setScale(2f);
         this.SCORE_BOARD.setColor(0.0f,0.0f,0.0f,1.0f);
+        this.theme_song.loop(1f);
 //        this.pipe_group.add(new Pipe("gameplay/pipe.png", false, 70,80));
 
     }
@@ -46,7 +49,6 @@ public class GamePlayState extends AbstractBaseState {
 
     @Override
     public void update(float dt) {
-
 
         // ADDING NEW PIPE TO THE GAME
 //        int n = ThreadLocalRandom.current().nextInt(100 , 150);
@@ -82,6 +84,7 @@ public class GamePlayState extends AbstractBaseState {
             this.bird.die();
         }
         if(! this.bird.not_dead){
+
             this.gsm.set(new GameOverState(
                     gsm,
                     this
@@ -126,6 +129,6 @@ public class GamePlayState extends AbstractBaseState {
 
     @Override
     public void dispose() {
-
+        this.theme_song.dispose();
     }
 }

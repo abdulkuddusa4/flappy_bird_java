@@ -2,6 +2,7 @@ package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -28,20 +29,13 @@ public class GameOverState extends AbstractBaseState{
     boolean is_pressed = false;
     long time0;
     MyStorage database_connection;
+    Sound theme_song;
+
 
 
     BitmapFont SCORE_BOARD;
     boolean named=false;
-//    protected GameOverState(GameStateManager gsm, Bird brd, SpriteGroup pipe_group) {
-//        super(gsm);
-//        this.bird=brd;
-//        this.pipe_group=pipe_group;
-//        this.full_name="";
-//        this.NAME_PLATE=new BitmapFont();
-//        this.NAME_PLATE.getData().setScale(2f);
-//        this.NAME_PLATE.setColor(1.0f,1.0f,1.0f,1.0f);
-//
-//    }
+
 
 
     protected GameOverState(GameStateManager gsm, GamePlayState game_play_state){
@@ -50,6 +44,7 @@ public class GameOverState extends AbstractBaseState{
         this.bird=game_play_state.bird;
         this.pipe_group=game_play_state.pipe_group;
         this.SCORE_BOARD=game_play_state.SCORE_BOARD;
+        this.theme_song=game_play_state.theme_song;
         this.input_bg = new Texture("gameover/input_bg.jpeg");
         this.full_name="";
         this.NAME_PLATE=new BitmapFont();
@@ -87,6 +82,7 @@ public class GameOverState extends AbstractBaseState{
             else if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && !this.is_pressed && this.named){
 
                 this.is_pressed=true;
+                this.theme_song.stop();
                 this.database_connection.add_record(this.full_name, this.bird.SCORE);
                 this.gsm.pop();
             }

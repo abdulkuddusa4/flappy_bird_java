@@ -77,6 +77,7 @@ public class Bird extends AbstractBaseSprite {
     public void jump(){
         if(not_dead && this.getVertices()[SpriteBatch.Y2]<Gdx.graphics.getHeight()){
             this.flap_music.play(1f);
+
             this.v=7;
         }
     }
