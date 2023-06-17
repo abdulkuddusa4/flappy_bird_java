@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.custom_db.MyDatabase;
 import com.mygdx.game.sprites.AbstractBaseSprite;
 import com.mygdx.game.sprites.Bird;
 import com.mygdx.game.sprites.Pipe;
@@ -23,6 +24,8 @@ public class GamePlayState extends AbstractBaseState {
     int time;
 
     BitmapFont SCORE_BOARD;
+    BitmapFont HIGH_SCORE_BOARD;
+    double HIGH_SCORE=0;
     Sound theme_song = Gdx.audio.newSound(Gdx.files.internal("gameplay/musics/theme_song.mp3"));
 
     public GamePlayState(GameStateManager gsm) {
@@ -33,7 +36,12 @@ public class GamePlayState extends AbstractBaseState {
         this.SCORE_BOARD=new BitmapFont();
         this.SCORE_BOARD.getData().setScale(2f);
         this.SCORE_BOARD.setColor(0.0f,0.0f,0.0f,1.0f);
-        this.theme_song.loop(1f);
+        this.HIGH_SCORE_BOARD=new BitmapFont();
+        this.HIGH_SCORE_BOARD.getData().setScale(2f);
+        this.HIGH_SCORE_BOARD.setColor(0.0f,0.0f,0.0f,1.0f);
+        this.HIGH_SCORE=new MyDatabase().get_high_score();
+
+        this.theme_song.loop(3f);
 //        this.pipe_group.add(new Pipe("gameplay/pipe.png", false, 70,80));
 
     }
@@ -49,6 +57,7 @@ public class GamePlayState extends AbstractBaseState {
 
     @Override
     public void update(float dt) {
+        this.HIGH_SCORE = Math.max(this.bird.SCORE,this.HIGH_SCORE);
 
         // ADDING NEW PIPE TO THE GAME
 //        int n = ThreadLocalRandom.current().nextInt(100 , 150);
@@ -119,11 +128,18 @@ public class GamePlayState extends AbstractBaseState {
                 Gdx.graphics.getWidth(),
                 Gdx.graphics.getHeight()
         );
-        this.SCORE_BOARD.draw(sb,"Score: "+this.bird.SCORE,100,600);
         sb.end();
 
 
         this.pipe_group.render(sb);
+        sb.begin();
+        this.SCORE_BOARD.draw(sb,"Score: "+this.bird.SCORE,100,600);
+        this.HIGH_SCORE_BOARD.draw(sb,
+                "High_Score: "+this.HIGH_SCORE,
+                Gdx.graphics.getWidth()-200,
+                600
+        );
+        sb.end();
         this.bird.render(sb);
     }
 

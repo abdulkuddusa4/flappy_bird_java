@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.custom_db.MyStorage;
+import com.mygdx.game.custom_db.MyDatabase;
 
 public class HighScoreState extends AbstractBaseState{
     Texture bg,dark_bg;
@@ -13,7 +13,7 @@ public class HighScoreState extends AbstractBaseState{
     BitmapFont high_score_index;
     BitmapFont HIGH_SCORE_LIST;
     BitmapFont ESCAPE_MSG;
-    MyStorage database_connection;
+    MyDatabase database_connection;
 
 //    static int PERFECT_STRING_WIDTH=10;
     static int PERFECT_STRING_WIDTH=50;
@@ -41,7 +41,7 @@ public class HighScoreState extends AbstractBaseState{
 
 
 
-        this.database_connection = new MyStorage();
+        this.database_connection = new MyDatabase();
 
 
     }

@@ -1,24 +1,21 @@
 package com.mygdx.game.custom_db;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.mygdx.game.my_exception.InvalidCSVRecord;
 import com.mygdx.game.states.HighScoreState;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Stack;
 
-public class MyStorage {
+public class MyDatabase {
     int length;
     ArrayList<MyRecord> records;
     File db;
 
     boolean is_empty=false;
 
-    public MyStorage(){
-        this.db = new File("db/scores");
+    public MyDatabase(){
+        this.db = new File("core/src/com/mygdx/game/custom_db/db/scores");
         records = new ArrayList<>();
         try{
             Scanner sc = new Scanner(this.db);
@@ -46,7 +43,7 @@ public class MyStorage {
 
     }
 
-    public void add_record(String name, double value){
+    public void add_record(String name, int value){
         for(MyRecord record:this.records){
             if (record.isEqueal(name)){
                 record.setScore(Math.max(value, record.getScore()));
@@ -90,7 +87,7 @@ public class MyStorage {
     public String GET_PERFECT_RECORDS(){
         int count=0;
         String my_st="";
-        ArrayList<MyRecord> counted_records= new ArrayList<MyRecord>();
+        ArrayList<MyRecord> counted_records= new ArrayList<>();
         if (this.records.isEmpty())
             return my_st;
         counted_records.addAll(this.records);
@@ -114,4 +111,13 @@ public class MyStorage {
 
         return my_st;
     }
+
+    public double get_high_score(){
+        double highscore = 0;
+        for(MyRecord record:this.records){
+            highscore = Math.max(highscore,record.getScore());
+        }
+        return highscore;
+    }
+
 }

@@ -3,18 +3,12 @@ package com.mygdx.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.mygdx.game.custom_db.MyStorage;
-import com.mygdx.game.my_utils.MyTextInputListener;
+import com.mygdx.game.custom_db.MyDatabase;
 import com.mygdx.game.sprites.Bird;
 import com.mygdx.game.sprites.SpriteGroup;
-import org.graalvm.compiler.phases.common.NodeCounterPhase;
 
 public class GameOverState extends AbstractBaseState{
     Bird bird;
@@ -28,7 +22,7 @@ public class GameOverState extends AbstractBaseState{
     String full_name;
     boolean is_pressed = false;
     long time0;
-    MyStorage database_connection;
+    MyDatabase database_connection;
     Sound theme_song;
 
 
@@ -55,7 +49,7 @@ public class GameOverState extends AbstractBaseState{
         this.CONTINUE_MSG.getData().setScale(3f);
         this.CONTINUE_MSG.setColor(1.0f,1.0f,0.0f,1.0f);
 
-        this.database_connection = new MyStorage();
+        this.database_connection = new MyDatabase();
 
 
 
