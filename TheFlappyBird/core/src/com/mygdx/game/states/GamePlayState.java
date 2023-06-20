@@ -25,7 +25,7 @@ public class GamePlayState extends AbstractBaseState {
 
     BitmapFont SCORE_BOARD;
     BitmapFont HIGH_SCORE_BOARD;
-    double HIGH_SCORE=0;
+    int HIGH_SCORE=0;
     Sound theme_song = Gdx.audio.newSound(Gdx.files.internal("gameplay/musics/theme_song.mp3"));
 
     public GamePlayState(GameStateManager gsm) {
@@ -39,7 +39,7 @@ public class GamePlayState extends AbstractBaseState {
         this.HIGH_SCORE_BOARD=new BitmapFont();
         this.HIGH_SCORE_BOARD.getData().setScale(2f);
         this.HIGH_SCORE_BOARD.setColor(0.0f,0.0f,0.0f,1.0f);
-        this.HIGH_SCORE=new MyDatabase().get_high_score();
+        this.HIGH_SCORE=(int)new MyDatabase().get_high_score();
 
         this.theme_song.loop(3f);
 //        this.pipe_group.add(new Pipe("gameplay/pipe.png", false, 70,80));
@@ -136,7 +136,7 @@ public class GamePlayState extends AbstractBaseState {
         this.SCORE_BOARD.draw(sb,"Score: "+this.bird.SCORE,100,600);
         this.HIGH_SCORE_BOARD.draw(sb,
                 "High_Score: "+this.HIGH_SCORE,
-                Gdx.graphics.getWidth()-200,
+                Gdx.graphics.getWidth()-300,
                 600
         );
         sb.end();
